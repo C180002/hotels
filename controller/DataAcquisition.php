@@ -4,7 +4,7 @@
 
     class DataAcquisition
     {
-        public function selectHotel()
+        public function selectHotel($address)
         {
             // データベース処理インスタンス生成
             $dp = new DatabaseProcess();
@@ -18,16 +18,30 @@
                     "  * ".
                     "FROM ".
                     "  hoteldb.hotels ".
+                    "WHERE ".
+                    "  pref LIKE '%:Address%' ".
+                    // "    OR ".
+                    // "  city LIKE '%:Address%' ".
+                    // "    OR ".
+                    // "  address LIKE '%:Address%' ".
+                    "ORDER BY ".
+                    "  id ASC ".
                     ";";
 
             // クエリー実行準備
             $pdo_stmn = $pdo->prepare($query);
             
+            /* プレースホルダーに設定するパラメーターの連想配列を設定 */
+            $param_a = [];
+
+            $param_a[":Address"] = $address;
+            
             // クエリー実行
-            $pdo_stmn->execute();
+            $pdo_stmn->execute($param_a);
             
             // 全ての結果行を含む配列を返戻
             $rs = $pdo_stmn->fetchAll();
+            // $rs = $pdo_stmn->fetch();
 
             // データベース切断
             $dp->disconnectDatabase($pdo);
