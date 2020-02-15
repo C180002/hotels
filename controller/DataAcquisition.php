@@ -31,14 +31,11 @@
             // クエリー実行準備
             $pdo_stmn = $pdo->prepare($query);
             
-            /* プレースホルダーに設定するパラメーターの連想配列を設定 */
-            $param_a = [];
-
-            // $param_a[":AmbiguousPlace"] = "'%".$address."%'";
-            $param_a[":AmbiguousPlace"] = "%".$address."%";
+            // 値をパラメーターにバインド
+            $pdo_stmn->bindValue(":AmbiguousPlace", "%".$address."%");
             
             // クエリー実行
-            $pdo_stmn->execute($param_a);
+            $pdo_stmn->execute();
             
             // 全ての結果行を含む配列を返戻
             $rs = $pdo_stmn->fetchAll();
