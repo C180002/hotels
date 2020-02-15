@@ -19,13 +19,11 @@
                     "FROM ".
                     "  hoteldb.hotels ".
                     "WHERE ".
-                    // "  pref LIKE '%:Address%' ".
-                    // "  pref LIKE ':AmbiguousPlace' ".
                     "  pref LIKE :AmbiguousPlace ".
-                    // "    OR ".
-                    // "  city LIKE '%:Address%' ".
-                    // "    OR ".
-                    // "  address LIKE '%:Address%' ".
+                    "    OR ".
+                    "  city LIKE :AmbiguousPlace ".
+                    "    OR ".
+                    "  address LIKE :AmbiguousPlace ".
                     "ORDER BY ".
                     "  id ASC ".
                     ";";
@@ -36,9 +34,8 @@
             /* プレースホルダーに設定するパラメーターの連想配列を設定 */
             $param_a = [];
 
-            // $param_a[":Address"] = $address;
-            // $param_a[":AmbiguousPlace"] = "%".$address."%";
-            $param_a[":AmbiguousPlace"] = "'%".$address."%'";
+            // $param_a[":AmbiguousPlace"] = "'%".$address."%'";
+            $param_a[":AmbiguousPlace"] = "%".$address."%";
             
             // クエリー実行
             $pdo_stmn->execute($param_a);

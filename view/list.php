@@ -13,7 +13,8 @@
     
     if (isset($_GET['address']))
     {
-        $address = $_GET['address'];
+        // $address = $_GET['address'];
+        $address = preg_replace('/\A[\p{C}\p{Z}]++|[\p{C}\p{Z}]++\z/u', '', $_GET['address']);
 
         // $_SESSION['id'] = $id;
     }
