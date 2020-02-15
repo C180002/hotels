@@ -28,18 +28,17 @@
                     "  id ASC ".
                     ";";
 
-            // クエリー実行準備
+            // 文を実行する準備を行って文オブジェクトを返戻
             $pdo_stmn = $pdo->prepare($query);
             
             // 値をパラメーターにバインド
             $pdo_stmn->bindValue(":AmbiguousPlace", "%".$address."%");
             
-            // クエリー実行
+            // プリペアード・ステートメント実行
             $pdo_stmn->execute();
             
             // 全ての結果行を含む配列を返戻
             $rs = $pdo_stmn->fetchAll();
-            // $rs = $pdo_stmn->fetch();
 
             // データベース切断
             $dp->disconnectDatabase($pdo);

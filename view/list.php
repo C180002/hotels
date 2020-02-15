@@ -13,10 +13,7 @@
     
     if (isset($_GET['address']))
     {
-        // $address = $_GET['address'];
         $address = preg_replace('/\A[\p{C}\p{Z}]++|[\p{C}\p{Z}]++\z/u', '', $_GET['address']);
-
-        // $_SESSION['id'] = $id;
     }
 
     $da = new DataAcquisition();
@@ -43,33 +40,28 @@
 ?>
 					<tr>
 						<td>
-							<!-- <img src="../images/4.png" width="100" /> -->
 							<img src="../images/<?= $htl->getImage() ?>" width="100" />
 						</td>
 						<td>
 							<table class="detail">
 								<tr>
 									<td>
-                    <!-- 西新宿ステーションホテル -->
                     <?= $htl->getName() ?>
                     <br />
                   </td>
 								</tr>
 								<tr>
 									<td>
-                    <!-- 東京都新宿区西新宿 11-11-11 -->
                     <?= $htl->getPref() ?><?= $htl->getCity() ?><?= $htl->getAddress() ?>
                   </td>
 								</tr>
 								<tr>
 									<td>
-                    <!-- 宿泊料：&yen;8,500 -->
                     宿泊料：&yen;<?= number_format($htl->getPrice()) ?>
                   </td>
 								</tr>
 								<tr>
 									<td>
-                    <!-- 最寄駅：新宿駅、西新宿駅から徒歩5分 -->
                     <?= $htl->getMemo() ?>
                   </td>
 								</tr>
